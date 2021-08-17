@@ -149,8 +149,9 @@ To update jobeinabox image, follow these steps:
 2. Run `git pull` to pull latest changes from the Github repository
 3. If there were changes, rebuild the Docker image: `sudo docker build . -t my/jobeinabox --build-arg TZ="Europe/Helsinki"`
 4. Stop the current Docker image: `sudo docker stop my/jobeinabox`
-5. Remove the current Docker image: `sudo docker rm my/jobeinabox`
-6. And then deploy the new image: `sudo docker run -d -p 4000:80 --name jobe my/jobeinabox`
+5. Remove the current Docker image: `sudo docker rmi $(docker images | grep 'my/jobeinabox') -f`
+6. Remove the current Ubuntu image spun up for Jobe: `sudo docker rmi $(docker images | grep 'ubuntu') -f`
+7. And then deploy the new image: `sudo docker run -d -p 4000:80 --name jobe my/jobeinabox`
 
 ## Testing the Installation (as a teacher)
 
