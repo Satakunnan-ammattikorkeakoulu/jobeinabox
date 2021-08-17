@@ -57,9 +57,9 @@ RUN ln -snf /usr/share/zoneinfo/"$TZ" /etc/localtime && \
         sqlite3 \
         sudo \
         tzdata \
-        unzip && \
-        python3-matplotlib && \
-        python3-dev && \
+        unzip \
+        python3-matplotlib \
+        python3-dev \
     python3 -m pip install pylint && \
     pip3 install pandas && \
     pip3 install numpy && \
