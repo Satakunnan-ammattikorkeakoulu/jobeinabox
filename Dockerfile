@@ -31,6 +31,7 @@ COPY container-test.sh /
 # Redirect apache logs to stdout
 # Configure apache
 # Configure php
+# Install python3 pip libraries
 # Get and install jobe
 # Clean up
 RUN ln -snf /usr/share/zoneinfo/"$TZ" /etc/localtime && \
@@ -57,7 +58,31 @@ RUN ln -snf /usr/share/zoneinfo/"$TZ" /etc/localtime && \
         sudo \
         tzdata \
         unzip && \
+        python3-matplotlib && \
+        python3-dev && \
     python3 -m pip install pylint && \
+    pip3 install pandas && \
+    pip3 install numpy && \
+    pip3 install matplotlib && \
+    pip3 install pillow && \
+    pip3 install pylint && \
+    pip3 install pytesseract && \
+    pip3 install scikit-learn && \
+    pip3 install pytest && \
+    pip3 install mock && \
+    pip3 install scikit-image && \
+    pip3 install beautifulsoup4 && \
+    pip3 install regex && \
+    pip3 install jsonlib-python3 && \
+    pip3 install spacy && \
+    pip3 install scipy && \
+    pip3 install keras && \
+    pip3 install requests && \
+    pip3 install urllib3 && \
+    pip3 install https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.0.0/en_core_web_sm-3.0.0-py3-none-any.whl && \
+    pip3 install transferflow && \
+    pip3 install --upgrade tensorflow && \
+    pip3 install nltk && \
     pylint --reports=no --score=n --generate-rcfile > /etc/pylintrc && \
     ln -sf /proc/self/fd/1 /var/log/apache2/access.log && \
     ln -sf /proc/self/fd/1 /var/log/apache2/error.log && \
