@@ -66,7 +66,6 @@ RUN ln -snf /usr/share/zoneinfo/"$TZ" /etc/localtime && \
     pip3 install matplotlib && \
     pip3 install pillow && \
     pip3 install pylint && \
-    pip3 install pytesseract && \
     pip3 install scikit-learn && \
     pip3 install pytest && \
     pip3 install mock && \
