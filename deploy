@@ -1,0 +1,19 @@
+#! /bin/bash
+
+echo "Removing all untracked changes"
+git clean -f
+
+echo "Pulling latest changes"
+git pull
+
+echo "Stopping all docker containers"
+sudo docker stop $(docker ps -a -q)
+
+echo "Removing all docker containers and images"
+sudo docker system prune -a -f
+
+echo "Building the docker image"
+sudo docker build . -t my/jobeinabox --build-arg TZ="Europe/Helsinki"
+
+echo "Starting the Docker image"
+sudo docker run -d -p 4000:80 --name jobe my/jobeinabox
