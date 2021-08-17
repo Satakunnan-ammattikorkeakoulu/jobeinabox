@@ -151,7 +151,8 @@ To update jobeinabox image, follow these steps:
 4. Stop the current Docker image: `sudo docker stop my/jobeinabox`
 5. Remove the current Docker image: `sudo docker rmi $(docker images | grep 'my/jobeinabox') -f`
 6. Remove the current Ubuntu image spun up for Jobe: `sudo docker rmi $(docker images | grep 'ubuntu') -f`
-7. And then deploy the new image: `sudo docker run -d -p 4000:80 --name jobe my/jobeinabox`
+7. Remove the old containers from the hard drive: `sudo docker container prune`
+8. And then deploy the new image: `sudo docker run -d -p 4000:80 --name jobe my/jobeinabox`
 
 ## Testing the Installation (as a teacher)
 
