@@ -1,6 +1,6 @@
 # JobeInABox customized for SAMK
 
-This is a fork of [trampgeek/JobeInABox](https://github.com/trampgeek/jobeinabox) that introduces additional python 3 libraries for AI.
+This is a fork of [trampgeek/JobeInABox](https://github.com/trampgeek/jobeinabox) that introduces additional python 3 libraries for AI and an additional deployment script.
 
 This readme contains instructions for setting up [CodeRunner](https://coderunner.org.nz/) Moodle plugin and the required [Jobe](https://github.com/trampgeek/jobe) server using this repository as the Jobe image. This step-by-step tutorial has been made to work with Jobe server running on Ubuntu 20.04.
 
@@ -85,19 +85,11 @@ git clone https://github.com/Satakunnan-ammattikorkeakoulu/jobeinabox
 cd jobeinabox
 ```
 
-Then, we need to build the image ourself, passing our timezone into it:
+Then we just need to give the deploy script +x (execute) permission and run it. The deploy script will reset the repository, pull latest changes from github, stop and completely remove all docker instances from the server (NOTE: This will remove all other docker instances too, make sure that the server that you use is only used to host the Jobe server), redeploy the JobeInaBox server and then start it.
 
-```
-sudo docker build . -t my/jobeinabox --build-arg TZ="Europe/Helsinki"
-```
-
-#### Starting jobeinabox
-
-Then, after we have built the image, we can launch the Docker image in a port 4000:
-
-```
-sudo docker run -d -p 4000:80 --name jobe my/jobeinabox
-```
+Steps:
+1. ```chmod +x deploy```
+2. ```./deploy```
 
 It can take even 20 minutes for the image to launch for the first time as it is really large.
 
@@ -143,16 +135,7 @@ Ready!
 
 ## Updating jobeinabox
 
-To update jobeinabox image, follow these steps:
-
-1. Navigate to the location where jobeinabox Github repository have been copied into. By default, this should be: `cd ~/jobeinabox`
-2. Run `git pull` to pull latest changes from the Github repository
-3. If there were changes, rebuild the Docker image: `sudo docker build . -t my/jobeinabox --build-arg TZ="Europe/Helsinki"`
-4. Stop the current Docker image: `sudo docker stop my/jobeinabox`
-5. Remove the current Docker image: `sudo docker rmi $(docker images | grep 'my/jobeinabox') -f`
-6. Remove the current Ubuntu image spun up for Jobe: `sudo docker rmi $(docker images | grep 'ubuntu') -f`
-7. Remove the old containers from the hard drive: `sudo docker container prune`
-8. And then deploy the new image: `sudo docker run -d -p 4000:80 --name jobe my/jobeinabox`
+To update jobeinabox, just run the deploy script using ```./deploy``` which will update the local github repository, pull latest changes, remove all docker instances and redeploy the jobe docker server.
 
 ## Testing the Installation (as a teacher)
 
