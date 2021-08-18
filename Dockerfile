@@ -83,7 +83,7 @@ RUN ln -snf /usr/share/zoneinfo/"$TZ" /etc/localtime && \
     pip3 install urllib3 && \
     pip3 install https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.0.0/en_core_web_sm-3.0.0-py3-none-any.whl && \
     pip3 install transferflow && \
-    pip3 install --upgrade tensorflow && \
+    pip3 install --upgrade tensorflow-cpu && \
     pip3 install nltk && \
     pylint --reports=no --score=n --generate-rcfile > /etc/pylintrc && \
     ln -sf /proc/self/fd/1 /var/log/apache2/access.log && \
