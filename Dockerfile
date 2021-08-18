@@ -26,6 +26,12 @@ COPY 000-jobe.conf /
 # Copy test script
 COPY container-test.sh /
 
+# Install Python 3.8.5
+RUN apt-get update
+RUN apt-get --assume-yes --no-install-recommends install wget libssl-dev openssl build-essential zlib1g-dev
+RUN wget --no-check-certificate https://www.python.org/ftp/python/3.8.5/Python-3.8.5.tgz
+RUN tar xzvf Python-3.8.5.tgz && cd Python-3.8.5 && ./configure && make && make install
+
 # Set timezone
 # Install extra packages
 # Redirect apache logs to stdout
@@ -36,11 +42,9 @@ COPY container-test.sh /
 # Clean up
 RUN ln -snf /usr/share/zoneinfo/"$TZ" /etc/localtime && \
     echo "$TZ" > /etc/timezone && \
-    apt-get update && \
     apt-get --no-install-recommends install -yq \
         acl \
         apache2 \
-        build-essential \
         fp-compiler \
         git \
         libapache2-mod-php \
@@ -51,8 +55,6 @@ RUN ln -snf /usr/share/zoneinfo/"$TZ" /etc/localtime && \
         php-cli \
         php-cli \
         php-mbstring \
-        python3 \
-        python3-pip \
         python3-setuptools \
         sqlite3 \
         sudo \
