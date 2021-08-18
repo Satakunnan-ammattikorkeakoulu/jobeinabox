@@ -28,7 +28,7 @@ COPY container-test.sh /
 
 # Install Python 3.8.5
 RUN apt-get update
-RUN apt-get --assume-yes --no-install-recommends install wget libssl-dev openssl build-essential zlib1g-dev libffi-dev
+RUN apt-get --assume-yes --no-install-recommends install wget libssl-dev openssl build-essential zlib1g-dev libffi-dev libbz2-dev
 RUN wget --no-check-certificate https://www.python.org/ftp/python/3.8.5/Python-3.8.5.tgz
 RUN tar xzvf Python-3.8.5.tgz && cd Python-3.8.5 && ./configure && make && make install
 
