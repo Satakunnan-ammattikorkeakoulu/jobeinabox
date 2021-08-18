@@ -103,6 +103,10 @@ You can view the status of the image by executing:
 sudo docker ps
 ```
 
+#### Logging into the server shell
+
+```docker exec -it jobe /bin/bash```
+
 If it still states *Starting*, it is not yet running and ready.
 
 Another way to verify that the Jobe server is started is by using cURL:
