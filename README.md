@@ -25,18 +25,20 @@ Jobe (short for Job Engine) is a server that supports running of small compile-a
 Before starting the installation, you need to first:
 
 1. Have Moodle 3.x server running and have administrator rights to that Moodle server
-2. Have a Ubuntu (20.04) server ready where we can setup the Jobe server. The most optiomal solution would be to have the Jobe server installed in the same network as the Moodle server to get best security and performance.
+2. Have a Ubuntu server ready where we can setup the Jobe server. The most optiomal solution would be to have the Jobe server installed in the same network as the Moodle server to get best security and performance.
 
 ## Steps
 
 Installation is fairly straightforward:
 
-1. Install Jobe in it's own Ubuntu 20.04 server
+1. Install Jobe in it's own Ubuntu server
 2. Install the Moodle plugin, required other plugin and configure the Moodle plugin to send calculations into the Jobe server
 
 ## 1 / 2: Installing Jobe Server
 
-SSH into the Ubuntu 20.04 server where you will install Jobe. For best performance and security **this needs to be** a new server without anything else running on it. Before going further, check that you have Git installed with `git --version`. If it is not found, install Git first:
+SSH into the Ubuntu server where you will install Jobe. For best performance, security and to not lose any other work **this needs to be** a new server without anything else running on it.
+
+First, start by updating the server and installing Git:
 
 ```
 sudo apt update
@@ -49,8 +51,6 @@ sudo apt install git
 Now, we need to install Docker so we can run the Jobe server virtually in the server. Do that using these steps:
 
 ```
-sudo apt update
-sudo apt upgrade
 sudo apt install apt-transport-https ca-certificates curl software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
@@ -87,13 +87,17 @@ git clone https://github.com/Satakunnan-ammattikorkeakoulu/jobeinabox
 cd jobeinabox
 ```
 
-Then we just need to give the deploy script +x (execute) permission and run it. The deploy script will reset the repository, pull latest changes from github, stop and completely remove all docker instances from the server (NOTE: This will remove all other docker instances too, make sure that the server that you use is only used to host the Jobe server), redeploy the JobeInaBox server and then start it.
+Then we just need to give the deploy script +x (execute) permission and run it. The deploy script will reset the repository, pull latest changes from github, stop and completely remove all docker instances from the server (NOTE: This will remove all other docker instances too, make sure that the server that you use is only used to host the Jobe server), redeploy the JobeInaBox server and then start it. This script also pulls latest changes from the original [Jobe Github source code](https://github.com/trampgeek/jobe), so it is recommended to run this script every now and then even if this repository would not be updated.
 
 Steps:
 1. ```chmod +x deploy```
 2. ```./deploy```
 
 It can take even 20 minutes for the image to launch for the first time as it is really large.
+
+## Updating jobeinabox
+
+To update jobeinabox, just run the deploy script using ```./deploy``` which will update the local github repository, pull latest changes, remove all docker instances and redeploy the jobe docker server.
 
 #### Viewing Docker image status
 
@@ -103,11 +107,8 @@ You can view the status of the image by executing:
 sudo docker ps
 ```
 
-#### Logging into the server shell
-
-```docker exec -it jobe /bin/bash```
-
 If it still states *Starting*, it is not yet running and ready.
+
 
 Another way to verify that the Jobe server is started is by using cURL:
 
@@ -115,7 +116,11 @@ Another way to verify that the Jobe server is started is by using cURL:
 curl http://127.0.0.1:4000/jobe/index.php/restapi/languages
 ```
 
-And that's it! Once the Jobe server has been started, we just need to configure the Moodle plugin.
+If you get back a list of supported languages, then the server is ready and running.
+
+#### Logging into the server shell
+
+```docker exec -it jobe /bin/bash```
 
 ###  Allow Jobe server port 4000 access only into Moodle server
 
@@ -125,6 +130,10 @@ From security perspective it is also great to only allow access to the specific 
 sudo iptables -A INPUT -p tcp --dport 4000 -s MOODLE_SERVER_IP_HERE -j ACCEPT
 sudo iptables -A INPUT -p tcp --dport 4000 -j DROP
 ```
+
+Notice to replace the ```MOODLE_SERVER_IP_HERE``` with the server IP.
+
+And that's it about Jobe server! Next, you should install the CodeRunner plugin into your Moodle.
 
 ## 2 / 2: Installing CodeRunner Moodle Plugin
 
@@ -138,10 +147,6 @@ Jobe API-key: Leave as empty
 ```
 
 Ready!
-
-## Updating jobeinabox
-
-To update jobeinabox, just run the deploy script using ```./deploy``` which will update the local github repository, pull latest changes, remove all docker instances and redeploy the jobe docker server.
 
 ## Testing the Installation (as a teacher)
 
