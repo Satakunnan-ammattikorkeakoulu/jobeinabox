@@ -176,3 +176,10 @@ Testing the installation as a student is simple. First login as a student in Moo
 # More Tutorials
 
 To find out more tutorials on how to use the CodeRunner Moodle plugin, view the [author's Youtube Channel](https://www.youtube.com/channel/UCDRXp0D9QLBJWxkzjcHTJgA), [official website](https://coderunner.org.nz/), [official documentation](https://coderunner.org.nz/)
+
+We also have tutorials made in-house about Coderunner:
+- [Creating Exercises](https://www.youtube.com/watch?v=LbRcfHzWPhc)
+- [How Coderunner Works](https://www.youtube.com/watch?v=LZ0Je1IdgQE)
+- [Test Cases](https://www.youtube.com/watch?v=CaRA3_39E1w)
+- [Cheating Avoidance](https://www.youtube.com/watch?v=_kNMw51B-nM)
+- [Categorizing, Importing, Exporting](https://www.youtube.com/watch?v=FHwcX0Mp4FQ)
