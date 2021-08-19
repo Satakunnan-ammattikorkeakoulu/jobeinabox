@@ -120,6 +120,8 @@ If you get back a list of supported languages, then the server is ready and runn
 
 #### Logging into the server shell
 
+If required, you can login into the server shell (bash) by running this:
+
 ```docker exec -it jobe /bin/bash```
 
 ###  Allow Jobe server port 4000 access only into Moodle server
@@ -131,7 +133,7 @@ sudo iptables -A INPUT -p tcp --dport 4000 -s MOODLE_SERVER_IP_HERE -j ACCEPT
 sudo iptables -A INPUT -p tcp --dport 4000 -j DROP
 ```
 
-Notice to replace the ```MOODLE_SERVER_IP_HERE``` with the server IP.
+Notice to replace the ```MOODLE_SERVER_IP_HERE``` with the Moodle server's IP. These rules drop all communication from other locations to this computer and allows communication only from port 4000 from the Moodle server.
 
 And that's it about Jobe server! Next, you should install the CodeRunner plugin into your Moodle.
 
