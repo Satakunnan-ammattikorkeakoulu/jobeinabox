@@ -25,7 +25,7 @@ Jobe (short for Job Engine) is a server that supports running of small compile-a
 Before starting the installation, you need to first:
 
 1. Have Moodle 3.x server running and have administrator rights to that Moodle server
-2. Have a server ready where we can setup the Jobe server. The most optiomal solution would be to have the Jobe server installed in the same network as the Moodle server to get best security and performance. This server can be any Unix server that can run Docker like Ubuntu or CentOS.
+2. Have a Ubuntu (20.04) server ready where we can setup the Jobe server. The most optiomal solution would be to have the Jobe server installed in the same network as the Moodle server to get best security and performance.
 
 ## Steps
 
