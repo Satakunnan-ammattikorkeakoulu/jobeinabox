@@ -3,6 +3,9 @@
 echo "Removing all untracked changes"
 git clean -f
 
+echo "Restoring all changes"
+git restore *
+
 echo "Pulling latest changes"
 git pull
 
