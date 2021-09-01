@@ -17,3 +17,6 @@ sudo docker build . -t my/jobeinabox --build-arg TZ="Europe/Helsinki"
 
 echo "Starting the Docker image"
 sudo docker run -d -p 4000:80 --name jobe my/jobeinabox
+
+echo "Setting jobe Image to restart on server restart"
+sudo docker update --restart unless-stopped jobe
