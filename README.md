@@ -93,7 +93,7 @@ Steps:
 1. ```chmod +x deploy```
 2. ```./deploy```
 
-It can take even 20 minutes for the image to launch for the first time as it is really large.
+It can take even 20 minutes for the image to launch for the first time as it is really large. Also, the Docker Jobe server will automatically start again after your main Ubuntu server restarts.
 
 ##### Updating jobeinabox
 
