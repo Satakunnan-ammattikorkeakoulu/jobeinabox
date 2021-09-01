@@ -97,7 +97,7 @@ It can take even 20 minutes for the image to launch for the first time as it is 
 
 ##### Updating jobeinabox
 
-To update jobeinabox, just run the deploy script using ```./deploy``` which will update the local github repository, pull latest changes, remove all docker instances and redeploy the jobe docker server.
+To update jobeinabox, just run the deploy script using ```./deploy``` which will update the local github repository, pull latest changes, remove all docker instances and redeploy the jobe docker server. You might also need to run ```chmod +x deploy``` before you run this command.
 
 #### Viewing Docker image status
 
