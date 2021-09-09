@@ -131,9 +131,10 @@ From security perspective it is also great to only allow access to the specific 
 ```
 sudo iptables -A INPUT -p tcp --dport 4000 -s MOODLE_SERVER_IP_HERE -j ACCEPT
 sudo iptables -A INPUT -p tcp --dport 4000 -j DROP
+sudo iptables -A INPUT -p tcp --dport 4000 -s 127.0.0.1 -j ACCEPT
 ```
 
-Notice to replace the ```MOODLE_SERVER_IP_HERE``` with the Moodle server's IP. These rules drop all communication from other locations to this computer and allows communication only from port 4000 from the Moodle server.
+Notice to replace the ```MOODLE_SERVER_IP_HERE``` with the Moodle server's IP. These rules drop all communication from other locations to this computer and allows communication only from port 4000 from the Moodle server. The third line is also to allow connections from port 4000 through the local computer, for testing that the curl request to the jobe server goes through locally.
 
 And that's it about Jobe server! Next, you should install the CodeRunner plugin into your Moodle.
 
