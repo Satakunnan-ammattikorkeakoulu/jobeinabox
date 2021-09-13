@@ -26,11 +26,11 @@ COPY 000-jobe.conf /
 # Copy test script
 COPY container-test.sh /
 
-# Install Python 3.8.5
+# Install Python 3.8.10
 RUN apt-get update
 RUN apt-get --assume-yes --no-install-recommends install wget libssl-dev openssl build-essential zlib1g-dev libffi-dev libbz2-dev liblzma-dev
-RUN wget --no-check-certificate https://www.python.org/ftp/python/3.8.5/Python-3.8.5.tgz
-RUN tar xzvf Python-3.8.5.tgz && cd Python-3.8.5 && ./configure && make && make install
+RUN wget --no-check-certificate https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tgz
+RUN tar xzvf Python-3.8.10.tgz && cd Python-3.8.10 && ./configure && make && make install
 
 # Set timezone
 # Install extra packages
