@@ -26,25 +26,22 @@ COPY 000-jobe.conf /
 # Copy test script
 COPY container-test.sh /
 
-# Install Python 3.8.10
-RUN apt-get update
-RUN apt-get --assume-yes --no-install-recommends install wget libssl-dev openssl build-essential zlib1g-dev libffi-dev libbz2-dev liblzma-dev
-RUN wget --no-check-certificate https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tgz
-RUN tar xzvf Python-3.8.10.tgz && cd Python-3.8.10 && ./configure && make && make install
-
 # Set timezone
 # Install extra packages
 # Redirect apache logs to stdout
 # Configure apache
 # Configure php
+# Install python3
 # Install python3 pip libraries
 # Get and install jobe
 # Clean up
 RUN ln -snf /usr/share/zoneinfo/"$TZ" /etc/localtime && \
     echo "$TZ" > /etc/timezone && \
+    apt-get update && \
     apt-get --no-install-recommends install -yq \
         acl \
         apache2 \
+        build-essential \
         fp-compiler \
         git \
         libapache2-mod-php \
@@ -52,7 +49,6 @@ RUN ln -snf /usr/share/zoneinfo/"$TZ" /etc/localtime && \
         octave \
         openjdk-16-jdk \
         php \
-        php-cli \
         php-cli \
         php-mbstring \
         python3-setuptools \
@@ -63,29 +59,29 @@ RUN ln -snf /usr/share/zoneinfo/"$TZ" /etc/localtime && \
         python3-matplotlib \
         python3-dev \
         python3-bs4 && \
-    pip3 install --upgrade pip && \
+    python3 -m pip install --upgrade pip && \
     python3 -m pip install pylint && \
-    pip3 install pandas && \
-    pip3 install numpy && \
-    pip3 install matplotlib && \
-    pip3 install pillow && \
-    pip3 install pylint && \
-    pip3 install scikit-learn && \
-    pip3 install pytest && \
-    pip3 install mock && \
-    pip3 install scikit-image && \
-    pip3 install beautifulsoup4 && \
-    pip3 install regex && \
-    pip3 install jsonlib-python3 && \
-    pip3 install spacy && \
-    pip3 install scipy && \
-    pip3 install keras && \
-    pip3 install requests && \
-    pip3 install urllib3 && \
-    pip3 install https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.0.0/en_core_web_sm-3.0.0-py3-none-any.whl && \
-    pip3 install transferflow && \
-    pip3 install --upgrade tensorflow-cpu && \
-    pip3 install nltk && \
+    python3 -m pip install pandas && \
+    python3 -m pip install numpy && \
+    python3 -m pip install matplotlib && \
+    python3 -m pip install pillow && \
+    python3 -m pip install pylint && \
+    python3 -m pip install scikit-learn && \
+    python3 -m pip install pytest && \
+    python3 -m pip install mock && \
+    python3 -m pip install scikit-image && \
+    python3 -m pip install beautifulsoup4 && \
+    python3 -m pip install regex && \
+    python3 -m pip install jsonlib-python3 && \
+    python3 -m pip install spacy && \
+    python3 -m pip install scipy && \
+    python3 -m pip install keras && \
+    python3 -m pip install requests && \
+    python3 -m pip install urllib3 && \
+    python3 -m pip install https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.0.0/en_core_web_sm-3.0.0-py3-none-any.whl && \
+    python3 -m pip install transferflow && \
+    python3 -m pip install --upgrade tensorflow-cpu && \
+    python3 -m pip install nltk && \
     pylint --reports=no --score=n --generate-rcfile > /etc/pylintrc && \
     ln -sf /proc/self/fd/1 /var/log/apache2/access.log && \
     ln -sf /proc/self/fd/1 /var/log/apache2/error.log && \
