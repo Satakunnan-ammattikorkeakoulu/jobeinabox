@@ -51,6 +51,8 @@ RUN ln -snf /usr/share/zoneinfo/"$TZ" /etc/localtime && \
         php \
         php-cli \
         php-mbstring \
+        python3 \
+        python3-pip \
         python3-setuptools \
         sqlite3 \
         sudo \
