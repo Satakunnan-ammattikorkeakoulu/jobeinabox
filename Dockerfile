@@ -84,6 +84,7 @@ RUN ln -snf /usr/share/zoneinfo/"$TZ" /etc/localtime && \
     python3 -m pip install transferflow && \
     python3 -m pip install --upgrade tensorflow-cpu && \
     python3 -m pip install nltk && \
+
     pylint --reports=no --score=n --generate-rcfile > /etc/pylintrc && \
     ln -sf /proc/self/fd/1 /var/log/apache2/access.log && \
     ln -sf /proc/self/fd/1 /var/log/apache2/error.log && \
@@ -106,8 +107,31 @@ RUN ln -snf /usr/share/zoneinfo/"$TZ" /etc/localtime && \
     apt-get -y clean && \
     rm -rf /var/lib/apt/lists/*
 
+
+RUN apt-get update && apt-get install -q -y --no-install-recommends \
+    dirmngr \
+    gnupg2 \
+    && rm -rf /var/lib/apt/lists/*
+
+# add ros packages to package lists
+RUN echo "deb http://packages.ros.org/ros/ubuntu focal main" > /etc/apt/sources.list.d/ros1-latest.list
+
+# setup keys
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+
+# install ros and ros build tools
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ros-noetic-desktop-full \
+    python3-rosdep \
+    python3-rosinstall \
+    python3-rosinstall-generator \
+    python3-wstool build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+
 # Expose apache
 EXPOSE 80
+
 
 # Healthcheck, minimaltest.py should complete within 2 seconds
 HEALTHCHECK --interval=5m --timeout=2s \
