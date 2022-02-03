@@ -63,6 +63,7 @@ RUN ln -snf /usr/share/zoneinfo/"$TZ" /etc/localtime && \
         python3-bs4 && \
     python3 -m pip install --upgrade pip && \
     python3 -m pip install pylint && \
+    python3 -m pip install SQLAlchemy && \
     python3 -m pip install pandas && \
     python3 -m pip install numpy && \
     python3 -m pip install matplotlib && \
