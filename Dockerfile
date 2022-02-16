@@ -107,6 +107,13 @@ RUN ln -snf /usr/share/zoneinfo/"$TZ" /etc/localtime && \
     apt-get -y clean && \
     rm -rf /var/lib/apt/lists/*
 
+# Install Mono for C# support
+# Instructions taken from the official Mono website: https://www.mono-project.com/download/stable/#download-lin
+run apt install gnupg ca-certificates -y --no-install-recommends
+run apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+run echo "deb https://download.mono-project.com/repo/ubuntu stable-focal main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+run apt update -y --no-install-recommends
+run apt install mono-complete -y --no-install-recommends
 
 RUN apt-get update && apt-get install -q -y --no-install-recommends \
     dirmngr \
